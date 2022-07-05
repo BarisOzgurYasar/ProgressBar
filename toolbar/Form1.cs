@@ -17,7 +17,6 @@ namespace toolbar
         public Form1()
         {
             InitializeComponent();
-<<<<<<< HEAD
         }
 
         private void btnHesapla_Click(object sender, EventArgs e)
@@ -27,8 +26,6 @@ namespace toolbar
 
             dateTimeSettings(baslangic, DateTime.Now, bitis);
             
-=======
->>>>>>> 5d90d1759aac1aeec6da9a647d0d9ec44cf795f8
         }
 
         void dateTimeSettings(int baslangic, DateTime simdi, int bitis)
