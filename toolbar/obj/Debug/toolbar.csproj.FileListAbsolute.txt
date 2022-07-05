@@ -1,0 +1,16 @@
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\toolbar.exe.config
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\toolbar.exe
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\toolbar.pdb
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.csproj.AssemblyReference.cache
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.csproj.SuggestedBindingRedirects.cache
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.Form1.resources
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.Properties.Resources.resources
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.csproj.GenerateResource.cache
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.csproj.CoreCompileInputs.cache
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.exe
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.pdb
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\EntityFramework.dll
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\EntityFramework.xml
+C:\Users\husey\source\repos\toolbar\toolbar\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\husey\source\repos\toolbar\toolbar\obj\Debug\toolbar.csproj.CopyComplete
