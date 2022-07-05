@@ -42,7 +42,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(511, 23);
             this.progressBar1.TabIndex = 0;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // dtBaslangic
             // 
@@ -63,7 +62,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 16);
+            this.label1.Size = new System.Drawing.Size(109, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Başlangıç Tarihi";
             // 
@@ -72,7 +71,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(314, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 16);
+            this.label2.Size = new System.Drawing.Size(74, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Bitiş Tarihi";
             // 
@@ -99,7 +98,6 @@
             this.Controls.Add(this.progressBar1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
