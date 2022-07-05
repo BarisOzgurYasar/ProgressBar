@@ -18,31 +18,6 @@ namespace toolbar
         public Form1()
         {
             InitializeComponent();
-            
-            Int64 now = DateTime.Now.DayOfYear;
-            Int64 expect = DateTime.Now.DayOfYear + 10;
-
-            DateTime exDateTime = DateTime.Parse("22.04.2022");
-            DayOfWeek days = DateTime.Now.DayOfWeek;
-            
-
-            for (int i = 0; i < 10; i++)
-            {
-
-            }
-
-            label1.Text = exDateTime.DayOfWeek.ToString(); 
-            
-        }
-
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnHesapla_Click(object sender, EventArgs e)
