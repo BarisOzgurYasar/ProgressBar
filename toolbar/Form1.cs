@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using toolbar.Busnies;
 using toolbar.Entities;
 
+
+
 namespace toolbar
 {
     public partial class Form1 : Form
@@ -26,24 +28,24 @@ namespace toolbar
         int gün = 0;
         public void btnHesapla_Click(object sender, EventArgs e)
         {
-            int baslangic = dtBaslangic.Date.DayOfYear;
+            int baslangic = dtBaslangic.Value.DayOfYear;
             int bitis = dtBitis.Value.DayOfYear;
-            int cnt=0;
+            int cnt = 0;
 
-            for (int k = baslangic; k < bitis+(dtBitis.Value.Year-dtBaslangic.Date.Year)*365; k++)
+            for (int k = baslangic; k < bitis + (dtBitis.Value.Year - dtBaslangic.Value.Year) * 365; k++)
             {
-                DayOfWeek dayOfWeek = new DateTime(dtBaslangic.Date.Year, 1, 1).AddDays(k - 1).DayOfWeek;
+                DayOfWeek dayOfWeek = new DateTime(dtBaslangic.Value.Year, 1, 1).AddDays(k - 1).DayOfWeek;
 
-                if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)  
+                if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)
                 {
-                    
+
                 }
                 else
                 {
                     cnt++;
                 }
             }
-            Console.WriteLine(dtBaslangic.Date.Year + " " + cnt);
+            Console.WriteLine(dtBaslangic.Value.Year + " " + cnt);
 
             dateTimeSettings(baslangic, DateTime.Now, bitis);
 
@@ -79,7 +81,7 @@ namespace toolbar
             {
                 int bolum = 100 / aralık;
                 int bar = bolum * (simdi.DayOfYear - baslangic - tatil2);
-                progressBar1.Value = bar ;
+                progressBar1.Value = bar;
             }
             else
             {
@@ -102,15 +104,15 @@ namespace toolbar
         }
         public void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval= 1;
+            timer1.Interval = 1;
             saniye = saniye - 1;
-            
+
 
             txtBSaniye.Text = saniye.ToString();
             txtBDakika.Text = (dakika - 1).ToString();
             txtBSaat.Text = (saat - 1).ToString();
             //txtBGün.Text= (gün -1).ToString();
-            if (saniye== 0)
+            if (saniye == 0)
             {
                 dakika = dakika - 1;
                 txtBDakika.Text = dakika.ToString();
@@ -118,31 +120,74 @@ namespace toolbar
             }
             if (dakika == 0)
             {
-                saat = saat -1;
+                saat = saat - 1;
                 txtBSaat.Text = saat.ToString();
                 dakika = 1440;
             }
             if (saat == 0)
             {
-                gün = gün -1;
+                gün = gün - 1;
                 txtBGün.Text = gün.ToString();
             }
             if (gün == 0)
             {
                 timer1.Stop();
-                progressBar1.BackColor= Color.Red;
+                progressBar1.BackColor = Color.Red;
             }
-            if (txtBDakika.Text=="-1")
+            if (txtBDakika.Text == "-1")
             {
                 timer1.Stop();
                 txtBDakika.Text = "0";
                 txtBSaat.Text = "0";
-                txtBGün.Text="0";
+                txtBGün.Text = "0";
             }
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-             Application.Restart();
+            int sizeX = 60;
+            int xPos = 5;
+            int yPos = 60;
+
+            for (int i = 0; i < 100; i++)
+            {
+                Button buton = new System.Windows.Forms.Button();
+
+                buton.Location = new System.Drawing.Point(xPos, yPos);
+                buton.Name = "buton" + i.ToString();
+                buton.Size = new System.Drawing.Size(sizeX, 27);
+                buton.Text = "Yeni";
+                buton.UseVisualStyleBackColor = true;
+                buton.Tag = "buton";
+                Controls.Add(buton);
+
+                xPos += sizeX;
+                if (i % 10 == 0)
+                {
+                    yPos += 35;
+                    xPos = 5;
+                }
+
+            }
+
+
+            return;
+            Application.Restart();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int count = Controls.Count;
+
+            for (int i = count - 1; i > -1; i--)
+            {
+                Control control = Controls[i];
+
+                if (control.Tag != null && control.Tag.ToString() == "buton")
+                {
+                    Controls.Remove(control);
+                }
+            }
+
         }
     }
 }
