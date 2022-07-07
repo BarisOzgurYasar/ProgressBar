@@ -28,6 +28,7 @@ namespace toolbar
         int gün = 0;
         public void btnHesapla_Click(object sender, EventArgs e)
         {
+            timer1.Start();
             int baslangic = dtBaslangic.Value.DayOfYear;
             int bitis = dtBitis.Value.DayOfYear;
             int cnt = 0;
@@ -50,6 +51,8 @@ namespace toolbar
             dateTimeSettings(baslangic, DateTime.Now, bitis);
 
         }
+
+        int sayac=0;
 
         void dateTimeSettings(int baslangic, DateTime simdi, int bitis)
         {
@@ -82,6 +85,7 @@ namespace toolbar
                 int bolum = 100 / aralık;
                 int bar = bolum * (simdi.DayOfYear - baslangic - tatil2);
                 progressBar1.Value = bar;
+                
             }
             else
             {
@@ -106,12 +110,12 @@ namespace toolbar
         {
             timer1.Interval = 1;
             saniye = saniye - 1;
-
+            progressBar1.Increment(1);
 
             txtBSaniye.Text = saniye.ToString();
             txtBDakika.Text = (dakika - 1).ToString();
             txtBSaat.Text = (saat - 1).ToString();
-            //txtBGün.Text= (gün -1).ToString();
+            //txtBGün.Text = (gün - 1).ToString();
             if (saniye == 0)
             {
                 dakika = dakika - 1;
@@ -122,7 +126,7 @@ namespace toolbar
             {
                 saat = saat - 1;
                 txtBSaat.Text = saat.ToString();
-                dakika = 1440;
+                dakika = 60;
             }
             if (saat == 0)
             {
@@ -133,7 +137,9 @@ namespace toolbar
             {
                 timer1.Stop();
                 progressBar1.BackColor = Color.Red;
+                
             }
+
             if (txtBDakika.Text == "-1")
             {
                 timer1.Stop();
@@ -144,50 +150,22 @@ namespace toolbar
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            int sizeX = 60;
-            int xPos = 5;
-            int yPos = 60;
-
-            for (int i = 0; i < 100; i++)
-            {
-                Button buton = new System.Windows.Forms.Button();
-
-                buton.Location = new System.Drawing.Point(xPos, yPos);
-                buton.Name = "buton" + i.ToString();
-                buton.Size = new System.Drawing.Size(sizeX, 27);
-                buton.Text = "Yeni";
-                buton.UseVisualStyleBackColor = true;
-                buton.Tag = "buton";
-                Controls.Add(buton);
-
-                xPos += sizeX;
-                if (i % 10 == 0)
-                {
-                    yPos += 35;
-                    xPos = 5;
-                }
-
-            }
-
-
-            return;
             Application.Restart();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int count = Controls.Count;
-
-            for (int i = count - 1; i > -1; i--)
-            {
-                Control control = Controls[i];
-
-                if (control.Tag != null && control.Tag.ToString() == "buton")
-                {
-                    Controls.Remove(control);
-                }
-            }
-
-        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
