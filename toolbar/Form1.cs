@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using toolbar.Busnies;
 using toolbar.Entities;
-
+using System.Runtime.InteropServices;
 
 
 namespace toolbar
@@ -22,137 +22,162 @@ namespace toolbar
             InitializeComponent();
         }
 
-        private int saniye = 60;
-        int dakika = 0;
-        int saat = 0;
-        int gün = 0;
+        private int saniye = 0;
+        
+        int temp = 0;
+
+        int totalDaysOfWeeks = 0;
+        int shiftTime = 10;
         public void btnHesapla_Click(object sender, EventArgs e)
         {
-            timer1.Start();
-            int baslangic = dtBaslangic.Value.DayOfYear;
-            int bitis = dtBitis.Value.DayOfYear;
-            int cnt = 0;
 
-            for (int k = baslangic; k < bitis + (dtBitis.Value.Year - dtBaslangic.Value.Year) * 365; k++)
-            {
-                DayOfWeek dayOfWeek = new DateTime(dtBaslangic.Value.Year, 1, 1).AddDays(k - 1).DayOfWeek;
+            DateTime d1 = this.dtBaslangic.Value.Date;
+            DateTime d2 = this.dtBitis.Value.Date;
 
-                if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)
-                {
+            int sumDays = Convert.ToInt32((d2 - d1).TotalDays);
 
-                }
-                else
-                {
-                    cnt++;
-                }
+
+           int kalan1 = 8 - dayToInt((d1.DayOfWeek));
+           int kalan2 = dayToInt((d2.DayOfWeek));
+           int sumWeek = ((sumDays + 8 - kalan1 - kalan2) * (5)/7)-5;
+           
+           Console.WriteLine(sumWeek);
+           Console.WriteLine(" sumDays = " + sumDays + " kalan1 = " + kalan1 + " kalan2 = " + kalan2);
+
+            int firstWeek = 0;
+           int lastWeek = 0;
+           if (d1.DayOfWeek == DayOfWeek.Saturday || d1.DayOfWeek == DayOfWeek.Sunday)
+           {
+               firstWeek = 0;
+           }
+           else
+           {
+               firstWeek = 6 - dayToInt((d1.DayOfWeek));
             }
-            Console.WriteLine(dtBaslangic.Value.Year + " " + cnt);
 
-            dateTimeSettings(baslangic, DateTime.Now, bitis);
+           if (d2.DayOfWeek == DayOfWeek.Saturday || d2.DayOfWeek == DayOfWeek.Sunday)
+           {
+               lastWeek = 5;
+           }
+           else
+           {
+               lastWeek = dayToInt((d2.DayOfWeek));
+           }
+           
+           totalDaysOfWeeks = firstWeek + lastWeek + sumWeek;
 
-        }
+           Console.WriteLine("firstWeek = " + firstWeek + "  lastWeek = " + lastWeek + "sumDay = " + sumDays + " sumWeek = " + sumWeek + "  totalDaysOfWeeks = " + totalDaysOfWeeks);
+           Console.WriteLine(" sumDays = " + sumDays + " kalan1 = " + kalan1 + " kalan2 = " + kalan2 + " d1 day = " + d1.DayOfWeek + " d2 day = " +d2.DayOfWeek);
 
-        int sayac=0;
+           saniye = totalDaysOfWeeks * 3600 * shiftTime;
+           Console.WriteLine(saniye + " " + totalDaysOfWeeks);
 
-        void dateTimeSettings(int baslangic, DateTime simdi, int bitis)
-        {
-            int tatil = 0;
-            int tatil2 = 0;
-            for (int i = baslangic; i < bitis; i++)
+            int shiftHour = 17;
+            int shiftMinute = 40;
+            int shiftWorkingSecond = (shiftHour * 3600) + (shiftMinute * 60);
+            int nowSecond = (DateTime.Now.Hour * 3600) + (DateTime.Now.Minute * 60);
+
+            Console.WriteLine(shiftWorkingSecond- nowSecond);
+            if (nowSecond> shiftWorkingSecond )
             {
-                DayOfWeek dayOfWeek = new DateTime(simdi.Year, 1, 1).AddDays(i - 1).DayOfWeek;
-
-                if (dayOfWeek == DayOfWeek.Saturday)
-                {
-                    tatil += 1;
-                    if (i < simdi.DayOfYear)
-                    {
-                        tatil2 += 1;
-                    }
-                }
-                else if (dayOfWeek == DayOfWeek.Sunday)
-                {
-                    tatil += 1;
-                    if (i < simdi.DayOfYear)
-                    {
-                        tatil2 += 1;
-                    }
-                }
-            }
-            int aralık = bitis - baslangic - tatil;
-            if (aralık != 0)
-            {
-                int bolum = 100 / aralık;
-                int bar = bolum * (simdi.DayOfYear - baslangic - tatil2);
-                progressBar1.Value = bar;
-                
+                saniye = (totalDaysOfWeeks - 1) * 3600 * shiftTime;
             }
             else
             {
-                progressBar1.Value = 100;
+                saniye = ((totalDaysOfWeeks - 1) * 3600 * shiftTime) + (shiftWorkingSecond - nowSecond);
             }
-        }
+            temp = saniye;
 
-        public void button1_Click(object sender, EventArgs e)
-        {
-            fark = DateTime.Parse(dtBitis.Text) - DateTime.Parse(dtBaslangic.Text);
-            txtBGün.Text = fark.TotalDays.ToString();
-            txtBSaat.Text = fark.TotalHours.ToString();
-            txtBDakika.Text = fark.TotalMinutes.ToString();
-
+            
             timer1.Start();
-
-            dakika = Convert.ToInt32(txtBDakika.Text);
-            saat = Convert.ToInt32(txtBSaat.Text);
-            gün = Convert.ToInt32(txtBDakika.Text);
+            
+        
         }
+
+        public int dayToInt(DayOfWeek varDate)
+        {
+
+            if (varDate == DayOfWeek.Monday)
+            {
+                return 1;
+            }
+
+            if (varDate == DayOfWeek.Tuesday)
+            {
+                return 2;
+            }
+
+            if (varDate == DayOfWeek.Wednesday)
+            {
+                return 3;
+            }
+
+            if (varDate == DayOfWeek.Thursday)
+            {
+                return 4;
+            }
+
+            if (varDate == DayOfWeek.Friday)
+            {
+                return 5;
+            }
+
+            if (varDate == DayOfWeek.Saturday)
+            {
+                return 6;
+            }
+
+            if (varDate == DayOfWeek.Sunday)
+            {
+                return 7;
+            }
+            return 8;
+        }
+
         public void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = 1;
-            saniye = saniye - 1;
-            progressBar1.Increment(1);
+            timer1.Interval = 10;
 
-            txtBSaniye.Text = saniye.ToString();
-            txtBDakika.Text = (dakika - 1).ToString();
-            txtBSaat.Text = (saat - 1).ToString();
-            //txtBGün.Text = (gün - 1).ToString();
-            if (saniye == 0)
-            {
-                dakika = dakika - 1;
-                txtBDakika.Text = dakika.ToString();
-                saniye = 60;
-            }
-            if (dakika == 0)
-            {
-                saat = saat - 1;
-                txtBSaat.Text = saat.ToString();
-                dakika = 60;
-            }
-            if (saat == 0)
-            {
-                gün = gün - 1;
-                txtBGün.Text = gün.ToString();
-            }
-            if (gün == 0)
-            {
-                timer1.Stop();
-                progressBar1.BackColor = Color.Red;
-                
-            }
+            saniye = saniye - 10;
 
-            if (txtBDakika.Text == "-1")
+            //Console.WriteLine(saniye);
+
+            if (saniye <= 0)
             {
+                saniye = 0;
+                txtBSaniye.Text = (saniye % 60).ToString();
                 timer1.Stop();
-                txtBDakika.Text = "0";
-                txtBSaat.Text = "0";
-                txtBGün.Text = "0";
+                progressBar1.ForeColor = Color.Red;
             }
+           
+
+            txtBSaniye.Text = (saniye%60).ToString();
+            txtBDakika.Text = ((saniye%3600)/60).ToString();
+            txtBSaat.Text = ((saniye%(3600*shiftTime))/3600).ToString();
+            txtBGün.Text = ((saniye/(shiftTime*3600))).ToString();
+
+
+            progressBar1.Value = (((temp) - saniye) * 1000) / (temp);
+
+            lblPercentage.Text = " %" + ((((temp) - saniye) * 100) / (temp)).ToString();
+
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
             Application.Restart();
         }
 
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+            //progressBar1.Value = 50;
+            
+        }
+
+        private void chbDone_CheckedChanged(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            progressBar1.ForeColor = Color.Red;
+        }
     }
 }
 

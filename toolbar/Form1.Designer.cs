@@ -38,7 +38,6 @@ namespace toolbar
             this.label2 = new System.Windows.Forms.Label();
             this.btnHesapla = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnGünSayisiHesapla = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblGün = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,15 +50,20 @@ namespace toolbar
             this.txtBSaniye = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblPercentage = new System.Windows.Forms.Label();
+            this.chbDone = new System.Windows.Forms.CheckBox();
+            this.lblDone = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(15, 214);
+            this.progressBar1.Maximum = 1000;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(943, 41);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 0;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
             // 
             // dtBaslangic
             // 
@@ -107,16 +111,6 @@ namespace toolbar
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnGünSayisiHesapla
-            // 
-            this.btnGünSayisiHesapla.Location = new System.Drawing.Point(323, 427);
-            this.btnGünSayisiHesapla.Name = "btnGünSayisiHesapla";
-            this.btnGünSayisiHesapla.Size = new System.Drawing.Size(327, 24);
-            this.btnGünSayisiHesapla.TabIndex = 6;
-            this.btnGünSayisiHesapla.Text = "Gün sayısını hesapla";
-            this.btnGünSayisiHesapla.UseVisualStyleBackColor = true;
-            this.btnGünSayisiHesapla.Click += new System.EventHandler(this.button1_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -138,7 +132,7 @@ namespace toolbar
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(398, 394);
+            this.label5.Location = new System.Drawing.Point(385, 394);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 16);
             this.label5.TabIndex = 9;
@@ -180,7 +174,7 @@ namespace toolbar
             // 
             // txtBSaat
             // 
-            this.txtBSaat.Location = new System.Drawing.Point(439, 388);
+            this.txtBSaat.Location = new System.Drawing.Point(426, 388);
             this.txtBSaat.Name = "txtBSaat";
             this.txtBSaat.Size = new System.Drawing.Size(100, 22);
             this.txtBSaat.TabIndex = 14;
@@ -218,11 +212,45 @@ namespace toolbar
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // lblPercentage
+            // 
+            this.lblPercentage.AutoSize = true;
+            this.lblPercentage.Location = new System.Drawing.Point(15, 281);
+            this.lblPercentage.Name = "lblPercentage";
+            this.lblPercentage.Size = new System.Drawing.Size(26, 16);
+            this.lblPercentage.TabIndex = 19;
+            this.lblPercentage.Text = "%0";
+            // 
+            // chbDone
+            // 
+            this.chbDone.AutoSize = true;
+            this.chbDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.chbDone.Location = new System.Drawing.Point(907, 308);
+            this.chbDone.Name = "chbDone";
+            this.chbDone.Size = new System.Drawing.Size(37, 26);
+            this.chbDone.TabIndex = 20;
+            this.chbDone.Text = " ";
+            this.chbDone.UseVisualStyleBackColor = true;
+            this.chbDone.CheckedChanged += new System.EventHandler(this.chbDone_CheckedChanged);
+            // 
+            // lblDone
+            // 
+            this.lblDone.AutoSize = true;
+            this.lblDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblDone.Location = new System.Drawing.Point(861, 308);
+            this.lblDone.Name = "lblDone";
+            this.lblDone.Size = new System.Drawing.Size(40, 22);
+            this.lblDone.TabIndex = 21;
+            this.lblDone.Text = "Bitti";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 499);
+            this.Controls.Add(this.lblDone);
+            this.Controls.Add(this.chbDone);
+            this.Controls.Add(this.lblPercentage);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtBSaniye);
@@ -235,7 +263,6 @@ namespace toolbar
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblGün);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnGünSayisiHesapla);
             this.Controls.Add(this.btnHesapla);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -258,7 +285,6 @@ namespace toolbar
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnHesapla;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnGünSayisiHesapla;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblGün;
         private System.Windows.Forms.Label label5;
@@ -271,6 +297,9 @@ namespace toolbar
         private System.Windows.Forms.TextBox txtBSaniye;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblPercentage;
+        private System.Windows.Forms.CheckBox chbDone;
+        private System.Windows.Forms.Label lblDone;
     }
 }
 
